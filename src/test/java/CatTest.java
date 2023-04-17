@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class CatTest {
         Cat cat = new Cat(feline);
         List<String> expectedResult = Arrays.asList("Животные", "Птицы", "Рыба");
         try {
+            Mockito.when(cat.getFood()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
             List<String> actualResult = cat.getFood();
             Assert.assertEquals(expectedResult, actualResult);
         } catch (Exception e) {

@@ -1,17 +1,35 @@
 import com.example.Feline;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.List;
 
+
+@RunWith(Parameterized.class)
 public class FelineTest {
 
+    private final int kittens;
+
+    public FelineTest(int kittens) {
+        this.kittens = kittens;
+    }
+
+    @Parameterized.Parameters
+    public static Object[] getData() {
+        return new Object[][] {
+                { 0},
+                { 1},
+                { 5}
+        };
+    }
     @Test
     public void getKittensByCount() {
         Feline feline = new Feline();
-        int expectedResult = 4;
-        int actualResult = feline.getKittens(4);
+        int expectedResult = kittens;
+        int actualResult = feline.getKittens(kittens);
         Assert.assertTrue(expectedResult == actualResult);
     }
 
@@ -28,7 +46,7 @@ public class FelineTest {
         Feline feline = new Feline();
         String expectedResult = "Кошачьи";
         String actualResult = feline.getFamily();
-        Assert.assertTrue(expectedResult == actualResult);
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test

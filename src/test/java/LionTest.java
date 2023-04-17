@@ -17,7 +17,7 @@ public class LionTest {
     Feline feline;
 
     @Test
-    public void getKittensWithoutCount() {
+    public void getKittens() {
         Mockito.when(feline.getKittens()).thenReturn(1);
         Lion lion = new Lion(feline);
         int expectedResult = 1;
@@ -47,6 +47,17 @@ public class LionTest {
         } catch (Exception e) {
             System.out.println("Возникла непредвиденная ошибка");
         }
+    }
+
+    @Test
+    public void doesHaveManeByIncorrectSex() {
+        boolean hasException = false;
+        try {
+            new Lion("Оно");
+        } catch (Exception e) {
+            hasException = true;
+        }
+        Assert.assertTrue(hasException);
     }
 
     @Test
