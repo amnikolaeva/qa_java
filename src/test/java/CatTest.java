@@ -25,15 +25,11 @@ public class CatTest {
     }
 
     @Test
-    public void getFood() {
+    public void getFood() throws Exception {
         Cat cat = new Cat(feline);
         List<String> expectedResult = Arrays.asList("Животные", "Птицы", "Рыба");
-        try {
-            Mockito.when(cat.getFood()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
-            List<String> actualResult = cat.getFood();
-            Assert.assertEquals(expectedResult, actualResult);
-        } catch (Exception e) {
-            System.out.println("Возникла непредвиденная ошибка");
-        }
+        Mockito.when(feline.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
+        List<String> actualResult = cat.getFood();
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }

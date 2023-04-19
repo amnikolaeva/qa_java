@@ -17,43 +17,35 @@ public class LionTest {
     Feline feline;
 
     @Test
-    public void getKittens() {
+    public void getKittens() throws Exception {
         Mockito.when(feline.getKittens()).thenReturn(1);
-        Lion lion = new Lion(feline);
+        Lion lion = new Lion(feline, "Самец");
         int expectedResult = 1;
         int actualResult = lion.getKittens();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void lionDoesHaveMane() {
+    public void lionDoesHaveMane() throws Exception {
         boolean expectedResult = true;
-        try {
-            Lion lion = new Lion("Самец");
-            boolean actualResult = lion.doesHaveMane();
-            Assert.assertEquals(expectedResult, actualResult);
-        } catch (Exception e) {
-            System.out.println("Возникла непредвиденная ошибка");
-        }
+        Lion lion = new Lion(feline, "Самец");
+        boolean actualResult = lion.doesHaveMane();
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void femaleLionDoesHaveNoMane() {
+    public void femaleLionDoesHaveNoMane() throws Exception {
         boolean expectedResult = false;
-        try {
-            Lion lion = new Lion("Самка");
-            boolean actualResult = lion.doesHaveMane();
-            Assert.assertEquals(expectedResult, actualResult);
-        } catch (Exception e) {
-            System.out.println("Возникла непредвиденная ошибка");
-        }
+        Lion lion = new Lion(feline,"Самка");
+        boolean actualResult = lion.doesHaveMane();
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void doesHaveManeByIncorrectSex() {
         boolean hasException = false;
         try {
-            new Lion("Оно");
+            new Lion(feline, "Оно");
         } catch (Exception e) {
             hasException = true;
         }
@@ -61,15 +53,11 @@ public class LionTest {
     }
 
     @Test
-    public void getFood() {
-        Lion lion = new Lion(feline);
+    public void getFood() throws Exception {
+        Lion lion = new Lion(feline, "Самка");
         List<String> expectedResult = Arrays.asList("Животные", "Птицы", "Рыба");
-        try {
-            Mockito.when(lion.getFood()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
-            List<String> actualResult = lion.getFood();
-            Assert.assertEquals(expectedResult, actualResult);
-        } catch (Exception e) {
-            System.out.println("Возникла непредвиденная ошибка");
-        }
+        Mockito.when(lion.getFood()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
+        List<String> actualResult = lion.getFood();
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }
